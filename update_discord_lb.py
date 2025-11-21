@@ -2,7 +2,9 @@ import json
 import discord
 from datetime import datetime, timedelta
 
-TOKEN = "YOUR_BOT_TOKEN_HERE"
+from config import DISCORD_BOT_TOKEN
+
+TOKEN = DISCORD_BOT_TOKEN
 GUILD_ID = 123456789012345678  # Заменить на ID твоего сервера
 DAYS = 7
 
