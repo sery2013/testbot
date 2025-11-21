@@ -1112,7 +1112,7 @@ select option:checked {
   color: #000; /* чёрный цвет текста (иконки) */
   background: rgba(29, 161, 242, 0.1); /* фон с прозрачностью */
   border: 1px solid rgba(29, 161, 242, 0.5); /* обводка с прозрачностью */
-  border-radius: 5%; /* скругление 5% */
+  border-radius: 5%; /* скругление 5-10% */
   cursor: pointer; /* курсор указывает на кликабельность */
   transition: all 0.2s ease; /* плавный переход */
   display: flex; /* Используем flex для центрирования иконки */
@@ -1448,8 +1448,6 @@ a:link, a:visited {
 * {
   border-radius: 8px !important; /* или 2px, если хотите чуть больше */
 }
-
-
 /* === СТИЛИ ДЛЯ КНОПКИ ПОДЕЛИТЬСЯ === */
 .share-btn {
     background: none;
@@ -1459,38 +1457,125 @@ a:link, a:visited {
     cursor: pointer;
     outline: none; /* Убирает обводку при фокусе */
 }
-
 .share-btn svg {
     fill: currentColor; /* Использует цвет текста */
 }
 
+/* === DISCORD LEADERBOARD STYLES === */
+#discord-leaderboard {
+  background: linear-gradient(135deg, #f0c500, #e0b500); /* градиент с цветом #f0c500 */
+  border: 2px solid rgba(0, 0, 0, 0.4); /* изменена обводка */
+  border-radius: 7.5%; /* скругление 5-10% */
+  padding: 20px;
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+  color: #000; /* цвет текста */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* изменена тень */
+  transition: all 0.3s ease;
+}
 
+/* Полупрозрачные магические символы для Discord-лидерборда */
+#discord-leaderboard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" x="50" font-size="80" text-anchor="middle" fill="000" opacity="0.1">✦✧✦✧</text></svg>');
+  background-repeat: repeat;
+  background-size: 100px;
+  pointer-events: none;
+  z-index: -1;
+}
 
+#discord-leaderboard h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #000; /* цвет текста */
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8); /* изменена тень текста */
+}
 
+#discord-leaderboard .controls {
+  margin-bottom: 15px;
+  text-align: center;
+}
 
+#discord-leaderboard .controls button {
+  padding: 8px 15px;
+  color: #000; /* Изменён цвет текста на чёрный */
+  font-weight: 500;
+  background: linear-gradient(135deg, #fbd109, #e0b500); /* Градиент с цветом #fbd109 */
+  border: 2px solid rgba(0, 0, 0, 0.4); /* Тёмная обводка */
+  border-radius: 7.5%; /* Скругление */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-right: 8px;
+}
 
+/* Полупрозрачные магические символы для кнопок Discord-лидерборда */
+#discord-leaderboard .controls button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" x="50" font-size="80" text-anchor="middle" fill="000" opacity="0.1">✦✧✦✧</text></svg>');
+  background-repeat: repeat;
+  background-size: 100px;
+  pointer-events: none;
+  z-index: -1;
+}
 
+#discord-leaderboard .controls button:hover {
+  background: linear-gradient(135deg, #d0a500, #c09500); /* Изменён градиент при наведении */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тёмная тень при наведении */
+  transform: scale(1.05);
+}
 
+#discord-leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 3%; /* скругление 5-10% */
+  overflow: hidden;
+  background: transparent; /* Прозрачный фон, чтобы градиент родителя был виден */
+  color: #000; /* цвет текста */
+}
 
+#discord-leaderboard thead th {
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000; /* изменен цвет текста */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3); /* изменена обводка */
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: 0.2s;
+}
 
+#discord-leaderboard thead th:hover {
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8); /* изменена тень при наведении */
+}
 
+#discord-leaderboard tbody td {
+  padding: 10px 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* изменена обводка */
+  color: #000; /* чёрный цвет текста */
+}
 
+#discord-leaderboard tbody tr:hover {
+  background: rgba(0, 0, 0, 0.1); /* изменен цвет фона при наведении */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* изменена тень при наведении */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* === END DISCORD LEADERBOARD STYLES === */
