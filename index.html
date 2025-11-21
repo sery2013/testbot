@@ -306,6 +306,29 @@
                 </div>
             </section>
         </div>
+
+        <!-- === DISCORD LEADERBOARD (новый блок) === -->
+        <div id="discord-leaderboard" style="margin-top: 40px;">
+            <h2>💬 Discord Activity Leaderboard</h2>
+            <div class="controls">
+                <button onclick="sortByDiscord('messages')">Messages</button>
+                <button onclick="sortByDiscord('reactions_given')">Reactions</button>
+                <button onclick="sortByDiscord('joined_at')">Joined</button>
+            </div>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Messages</th>
+                        <th>Reactions</th>
+                        <th>Joined</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody id="discord-tbody"></tbody>
+            </table>
+        </div>
+
     </div>
 
     <!-- Chart.js CDN for analytics charts -->
@@ -324,18 +347,3 @@
  
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
