@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Markets</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* === CENTERED BANNER (1350×100, по центру, кликабельный, просто обновляет страницу) === */
+        .centered-banner {
+          width: 100%;
+          height: 100px; /* высота 100px */
+          position: sticky;
+          top: 0;
+          z-index: 1000; /* Высокий z-index, чтобы баннер был поверх других элементов */
+          display: flex;
+          justify-content: center; /* центрирует содержимое по горизонтали */
+          align-items: center;     /* центрирует содержимое по вертикали */
+          background: #0d1117; /* фон, если изображение не загрузится */
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .banner-link {
+          display: block;
+          width: 1350px;   /* фиксированная ширина изображения */
+          height: 100px;   /* фиксированная высота */
+          background: url("https://i.imgur.com/n08KBSh.png") no-repeat center center; /* <-- ССЫЛКА НА ИЗОБРАЖЕНИЕ БАННЕРА */
+          background-size: 1350px 100px; /* точный размер изображения */
+          cursor: pointer; /* Курсор указывает на возможность клика */
+        }
+
+        /* === LANGUAGE SWITCHER (в правом верхнем углу) === */
+        .lang-switcher {
+          position: absolute; /* Используем absolute, чтобы точно прижать к углу внутри sticky .centered-banner */
+          top: 10px;
+          right: 10px;
+          z-index: 1001; /* Выше, чем баннер */
+          display: flex;
+          gap: 2px; /* Маленький зазор между кнопками */
+        }
+
+        .lang-btn {
+          background: #e0e0e0; /* Светло-серый фон для НЕактивной кнопки */
+          color: #000; /* Чёрный текст для НЕактивной кнопки */
+          border: 1px solid #000; /* Тонкая чёрная обводка */
+          border-radius: 5px;
+          padding: 5px 8px;
+          cursor: pointer;
+          font-size: 0.9em;
+          transition: background-color 0.2s, color 0.2s;
+        }
+
+        .lang-btn:first-child {
+          border-radius: 5px 0 0 5px; /* Скругление только у левой кнопки */
+        }
+
+        .lang-btn:last-child {
+          border-radius: 0 5px 5px 0; /* Скругление только у правой кнопки */
+          border-left: none; /* Убираем левую границу у правой кнопки */
+        }
+
+        .lang-btn.active {
+          background: #ffeb3b; /* Ярко-жёлтый фон для активной кнопки */
+          color: #000; /* Чёрный текст для активной кнопки */
+        }
+
+        .lang-btn:hover {
+          background: #cccccc; /* Средний серый при наведении на НЕактивную */
+        }
+
+        .lang-btn.active:hover {
+          background: #fdd835; /* Чуть темнее жёлтого при наведении на активную */
+        }
+
+        /* === СТИЛИ ДЛЯ БЛОКА ПРИВЕТСТВИЯ === */
+        .welcome-block {
+            background-color: #fbd109; /* Изменён цвет фона на жёлтый */
+            border: 1px solid #2F4F4F; /* Рамка цвета #2F4F4F, как для лидерборда */
+            border-radius: 5%; /* Скругленные края, как вы предпочитаете для большинства блоков */
+            padding: 20px; /* Отступы внутри блока для лучшего вида */
+            color: black; /* Изменён цвет текста на чёрный для лучшей читаемости */
+            text-align: left; /* Выравнивание текста по левому краю */
+            margin: 20px auto; /* Центрирование блока по горизонтали с отступом сверху/снизу */
+            max-width: 800px; /* Ограничивает ширину для лучшего чтения на больших экранах */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для глубины (теперь с чёрным цветом) */
+        }
+
+        .welcome-block h1 {
+            margin-top: 0; /* Убирает верхний отступ у заголовка */
+            margin-bottom: 15px; /* Добавляет отступ под заголовком */
+            font-size: 2rem; /* Увеличивает размер заголовка */
+            text-align: center; /* Заголовок можно оставить по центру, как акцент */
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- === BANNER (теперь просто обновляет страницу) === -->
+    <div class="centered-banner">
+        <a href="javascript:location.reload()" class="banner-link"></a>
+        <!-- === LANGUAGE SWITCHER (в правом верхнем углу) === -->
+        <div class="lang-switcher">
+            <span id="lang-en" class="lang-btn active" data-lang="en">EN</span>
+            <span id="lang-ru" class="lang-btn" data-lang="ru">RU</span>
+        </div>
+    </div>
+
+    <div class="background"></div>
+
+    <!-- УБРАН: <div class="header-fixed"> <h1>Ritual Community</h1> </div> -->
+
+    <div class="container">
+        <!-- === WELCOME SECTION (теперь в рамке) === -->
+        <div class="welcome-block">
+            <h1 id="welcome-title">WELCOME KASHERS!</h1>
+            <p id="welcome-desc-1">This leaderboard is generated based on all posts in the <a href="https://x.com/i/communities/1902883093062574425" target="_blank">Flash Markets</a>.</p>
+            <p id="welcome-desc-2">If your posts are not published through <a href="https://x.com/i/communities/1902883093062574425" target="_blank">Flash Markets</a>, they will not be visible on the leaderboard.</p>
+            <p id="welcome-desc-3">By clicking on any participant, you can view their works directly on the website.</p>
+            <p id="welcome-desc-4">By clicking on any metric (for example, views), you can filter by it.</p>
+            <!-- --- ИЗМЕНЕНИЕ: Добавлен span id="last-updated" --- -->
+<p><strong>Last updated:</strong> <span>21 November 2025</span></p>        </div>
+
+        <!-- Новый объединённый блок (вкладки и follow developer в одной строке) -->
+        <div class="combined-bottom-block">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="leaderboard" id="tab-leaderboard-btn">Leaderboard</button>
+                <button class="tab-btn" data-tab="analytics" id="tab-analytics-btn">Analytics</button>
+            </div>
+            <div class="team-box">
+                <p id="follow-dev-text">Follow Developer - <a href="https://x.com/kaye_moni" target="_blank" id="follow-dev-link" style="color: white; text-decoration: underline;">@kaye_moni</a>  &nbsp;&nbsp;&nbsp; <a href="https://sery2013.github.io/kash-card/" target="_blank" style="color: black; text-decoration: underline;">Kash Card Generator</a> </p>
+            </div>
+        </div>
+        <!-- ... остальной код ... -->
+
+        <!-- wrapper for leaderboard content so we can toggle visibility -->
+        <div id="leaderboard-wrapper" class="tab-content active">
+            
+            <!-- Общая статистика -->
+            <div class="stats">
+                <div class="stat-box" id="total-posts">Total Posts: 0</div>
+                <div class="stat-box" id="total-users">Total Users: 0</div>
+                <div class="stat-box" id="total-views">Total Views: 0</div>
+            </div>
+
+            <!-- === SEARCH AND TIME FILTER IN ONE LINE === -->
+            <div class="search-time-filter-container">
+                <div class="search-section">
+                    <label for="search" class="search-label" id="search-label">SEARCH USER</label>
+                    <input type="text" id="search" placeholder="Type @handle or part of name..." class="search-input">
+                </div>
+                <div class="filter-section">
+                    <span class="filter-label" id="filter-label">FILTER BY TIME:</span>
+                    <select id="time-select" class="time-select">
+                        <option value="7" id="time-7">Last 7 days</option>
+                        <option value="14" id="time-14">Last 14 days</option>
+                        <option value="30" id="time-30">Last 30 days</option>
+                        <option value="all" id="time-all" selected>All time</option>
+                    </select>
+                    <!-- --- ИЗМЕНЕНИЕ: Кнопка Refresh удалена --- -->
+                </div>
+            </div>
+
+            <!-- Таблица лидеров -->
+            <table id="leaderboard">
+                <thead>
+                    <tr>
+                        <th id="name-header">User</th>
+                        <th id="posts-header">Posts <span class="sort-arrow">▲</span></th>
+                        <th id="likes-header">Likes <span class="sort-arrow"></span></th>
+                        <th id="retweets-header">Retweets <span class="sort-arrow"></span></th>
+                        <th id="comments-header">Comments <span class="sort-arrow"></span></th>
+                        <th id="views-col-header">Views <span class="sort-arrow"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body"></tbody>
+            </table>
+
+            <!-- Пагинация -->
+            <div class="pagination">
+                <button id="prev-page">Previous</button>
+                <span id="page-info"></span>
+                <button id="next-page">Next</button>
+            </div>
+
+            <!-- Твиты выбранного пользователя -->
+            <div id="tweets-container" style="margin-top: 20px;">
+                <ul id="tweets-list"></ul>
+            </div>
+        </div>
+
+        <!-- Analytics tab content (hidden by default) -->
+        <div id="tab-analytics" class="tab-content" style="display:none; text-align:left;">
+            <h2 id="analytics-title">Analytics</h2>
+
+            <!-- Time filter for analytics -->
+            <div class="analytics-time-filter" style="display:flex; gap:10px; align-items:center; margin-bottom:18px; background: rgba(255,255,255,0.02); padding:12px; border-radius:12px;">
+                <label for="analytics-time-select" id="analytics-time-label" style="font-weight:600; color:#a9ddd3; white-space:nowrap;">Filter by time:</label>
+                <select id="analytics-time-select" style="flex:1; max-width:180px;">
+                    <option value="all" id="analytics-time-all">All time</option>
+                    <option value="30" id="analytics-time-30">Last 30 days</option>
+                    <option value="14" id="analytics-time-14">Last 14 days</option>
+                    <option value="7" id="analytics-time-7">Last 7 days</option>
+                </select>
+                <!-- НОВЫЙ ФИЛЬТР ПО ЧАСАМ -->
+                <label for="hour-select" id="hour-label" style="font-weight:600; color:#a9ddd3; white-space:nowrap;">Filter by hour:</label>
+                <select id="hour-select" style="flex:1; max-width:180px;">
+                    <option value="all" id="hour-all">All hours</option>
+                    <option value="0" id="hour-0">00:00</option>
+                    <option value="1" id="hour-1">01:00</option>
+                    <option value="2" id="hour-2">02:00</option>
+                    <option value="3" id="hour-3">03:00</option>
+                    <option value="4" id="hour-4">04:00</option>
+                    <option value="5" id="hour-5">05:00</option>
+                    <option value="6" id="hour-6">06:00</option>
+                    <option value="7" id="hour-7">07:00</option>
+                    <option value="8" id="hour-8">08:00</option>
+                    <option value="9" id="hour-9">09:00</option>
+                    <option value="10" id="hour-10">10:00</option>
+                    <option value="11" id="hour-11">11:00</option>
+                    <option value="12" id="hour-12">12:00</option>
+                    <option value="13" id="hour-13">13:00</option>
+                    <option value="14" id="hour-14">14:00</option>
+                    <option value="15" id="hour-15">15:00</option>
+                    <option value="16" id="hour-16">16:00</option>
+                    <option value="17" id="hour-17">17:00</option>
+                    <option value="18" id="hour-18">18:00</option>
+                    <option value="19" id="hour-19">19:00</option>
+                    <option value="20" id="hour-20">20:00</option>
+                    <option value="21" id="hour-21">21:00</option>
+                    <option value="22" id="hour-22">22:00</option>
+                    <option value="23" id="hour-23">23:00</option>
+                </select>
+            </div>
+
+            <!-- Nested tabs for analytics sections -->
+            <div class="analytics-nested-tabs">
+                <button class="analytics-tab-btn active" data-analytics-tab="averages" id="analytics-tab-averages">Avg metrics</button>
+                <button class="analytics-tab-btn" data-analytics-tab="authors" id="analytics-tab-authors">Top 10 authors</button>
+                <button class="analytics-tab-btn" data-analytics-tab="posts" id="analytics-tab-posts">Top 10 posts</button>
+            </div>
+
+            <!-- 1) Average metrics per user -->
+            <section class="analytics-nested-content active" id="analytics-averages-section" data-analytics-section="averages">
+                <div class="analytics-block" id="analytics-averages">
+                    <h3 id="analytics-averages-title">Average metrics per user</h3>
+                    <div class="analytics-row" style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <div class="stat-box" id="avg-posts">Avg Posts: -</div>
+                        <div class="stat-box" id="avg-likes">Avg Likes: -</div>
+                        <div class="stat-box" id="avg-views">Avg Views: -</div>
+                    </div>
+                    
+                    <!-- Heatmap Section -->
+                    <div class="analytics-block" style="margin-top: 16px;">
+                        <h3 id="heatmap-title">Activity Heatmap (Tweets by Day & Hour)</h3>
+                        <div id="heatmap-container" style="display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; margin-top: 12px;"></div>
+                        <div id="heatmap-legend" style="display: flex; gap: 8px; margin-top: 8px; font-size: 0.85rem; color: #999;">
+                            <div>Sun</div> <div>Mon</div> <div>Tue</div> <div>Wed</div> <div>Thu</div> <div>Fri</div> <div>Sat</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart: tweets per day -->
+                    <div style="margin-top:16px;">
+                        <canvas id="analytics-chart" height="120"></canvas>
+                    </div>
+                    
+                    <!-- Export Buttons -->
+                    <div style="margin-top: 16px; display: flex; gap: 10px;">
+                        <button id="export-csv" class="tab-btn" style="font-size: 0.9rem; padding: 6px 12px;" id="export-csv-btn">Export CSV</button>
+                        <button id="export-json" class="tab-btn" style="font-size: 0.9rem; padding: 6px 12px;" id="export-json-btn">Export JSON</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2) Top 10 authors with filter -->
+            <section class="analytics-nested-content" id="analytics-authors-section" data-analytics-section="authors">
+                <div class="analytics-block" id="analytics-top-authors-block">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                        <h3 id="top-authors-title" style="margin:0;">Top 10 authors</h3>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <label for="author-metric-select" id="author-metric-label" style="font-weight:600; color:#a9ddd3;">Sort by:</label>
+                            <select id="author-metric-select">
+                                <option value="posts" id="author-metric-posts">Posts</option>
+                                <option value="likes" id="author-metric-likes">Likes</option>
+                                <option value="views" id="author-metric-views">Views</option>
+                            </select>
+                        </div>
+                    </div>
+                    <ol id="top-authors-list" style="margin-top:12px;"></ol>
+                </div>
+            </section>
+
+            <!-- 3) Top 10 posts with filter -->
+            <section class="analytics-nested-content" id="analytics-posts-section" data-analytics-section="posts">
+                <div class="analytics-block" id="analytics-top-posts-block">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                        <h3 id="top-posts-title" style="margin:0;">Top 10 posts</h3>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <label for="post-metric-select" id="post-metric-label" style="font-weight:600; color:#a9ddd3;">Sort by:</label>
+                            <select id="post-metric-select">
+                                <option value="likes" id="post-metric-likes">Likes</option>
+                                <option value="views" id="post-metric-views">Views</option>
+                            </select>
+                        </div>
+                    </div>
+                    <ol id="top-posts-list" style="margin-top:12px;"></ol>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Chart.js CDN for analytics charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+
+  <!-- ... ваш существующий HTML до </body> ... -->
+
+  <!-- Snow effect container -->
+  <div class="snow-container" id="snowContainer"></div>
+
+  <!-- Chart.js CDN for analytics charts -->
+  <!-- УДАЛЕНА ДУБЛИРУЮЩАЯ СТРОКА: <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+  <!-- УДАЛЕНА ДУБЛИРУЮЩАЯ СТРОКА: <script src="script.js"></script> -->
+
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
